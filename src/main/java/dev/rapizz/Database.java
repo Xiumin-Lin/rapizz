@@ -26,23 +26,22 @@ public class Database {
     /**
      * Enable a connection with the database
      * @throws SQLException if a database access error occurs
-     * @throws ClassNotFoundException if the class cannot be located
      */
-    private static void connection() throws SQLException, ClassNotFoundException {
+    private static void connect() throws SQLException {
         String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.jdbc.Driver"); // no need with JDBC 4.0
             Utils.Log.success("MySQL JDBC Driver");
 
             conn = DriverManager.getConnection(dbUrl, USER, PASSWORD);
             Utils.Log.success("✅ Connection Success !");
-        } catch (ClassNotFoundException e) {
-            Utils.Log.error("❌ Can't find the MySQL JDBC Driver !");
-            e.printStackTrace();
-            throw e;
+//        } catch (ClassNotFoundException e) {
+//            Utils.Log.error("❌ Can't find the MySQL JDBC Driver !");
+//            e.printStackTrace();
+//            throw e;
         } catch (SQLException e) {
-            Utils.Log.error("❌ Connection Failed : " + e.getMessage());
+            Utils.Log.error("❌ Connection Failed", e);
             e.printStackTrace();
             throw e;
         }
@@ -52,15 +51,15 @@ public class Database {
      * Releases the connection with the database
      * @throws SQLException if a database access error occurs
      */
-    private static void disconnection() throws SQLException {
+    private static void disconnect() throws SQLException {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
                 conn = null;
                 Utils.Log.success("✅ Disconnection Success !");
             }
-        } catch (Exception e){
-            Utils.Log.error("❌ Disconnection Failed !");
+        } catch (SQLException e){
+            Utils.Log.error("❌ Disconnection Failed !", e);
             throw e;
         }
     }
@@ -70,19 +69,18 @@ public class Database {
      * @param query the SELECT query to execute
      * @return a ResultSet object that contains the data produced by the given query or null
      * @throws SQLException if a database access error occurs
-     * @throws ClassNotFoundException if the class cannot be located
      */
-    public static ResultSet query(String query) throws SQLException, ClassNotFoundException {
+    public static ResultSet query(String query) throws SQLException {
         ResultSet resultSet = null;
         try(Statement statement = conn.createStatement()) {
-            connection();
+            connect();
             Utils.Log.info("SELECT statement: " + query + "\n");
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
-            Utils.Log.error("Problem occurred at select query operation : " + e);
+            Utils.Log.error("Problem occurred at select query operation", e);
             throw e;
         } finally {
-            disconnection();
+            disconnect();
         }
         return resultSet;
     }
@@ -91,11 +89,10 @@ public class Database {
      * For INSERT, UPDATE, or DELETE statement
      * @param query the update query to execute
      * @throws SQLException if a database access error occurs
-     * @throws ClassNotFoundException if the class cannot be located
      */
-    public static void update(String query) throws SQLException, ClassNotFoundException {
+    public static void update(String query) throws SQLException {
         try(Statement statement = conn.createStatement()) {
-            connection();
+            connect();
             Utils.Log.info("Update statement: " + query + "\n");
             //Run executeUpdate operation with given sql statement
             statement.executeUpdate(query);
@@ -104,7 +101,7 @@ public class Database {
             throw e;
         } finally {
             //Close connection
-            disconnection();
+            disconnect();
         }
     }
 }
