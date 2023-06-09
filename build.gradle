@@ -33,11 +33,12 @@ javafx {
 }
 
 dependencies {
-  //testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-  //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+  implementation 'mysql:mysql-connector-java:8.0.33'
+//  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+//  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
-//test {  useJUnitPlatform()  }
+//  test {  useJUnitPlatform()  }
 
 jlink {
   imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
@@ -47,9 +48,9 @@ jlink {
   }
 }
 
-jlinkZip {
-  group = 'distribution'
-}
+// jlinkZip {
+//  group = 'distribution'
+// }
 
 jar {
   manifest {
