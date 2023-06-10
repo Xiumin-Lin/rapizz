@@ -15,8 +15,8 @@ public class Database {
     private static Connection conn;
 
     static {
-        Dotenv dotenv = Dotenv.configure().load();
-        DB_NAME = dotenv.get("DB_PORT");
+        Dotenv dotenv = Dotenv.configure().directory("./src/main/resources").load();
+        DB_NAME = dotenv.get("DB_NAME");
         HOST = dotenv.get("DB_HOST");
         USER = dotenv.get("DB_USER");
         PORT = dotenv.get("DB_PORT");
@@ -29,19 +29,19 @@ public class Database {
      */
     private static void connect() throws SQLException {
         String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
+        Utils.Log.success("URL : " + dbUrl);
 
         try {
 //            Class.forName("com.mysql.jdbc.Driver"); // no need with JDBC 4.0
-            Utils.Log.success("MySQL JDBC Driver");
-
+//            Utils.Log.success("MySQL JDBC Driver");
             conn = DriverManager.getConnection(dbUrl, USER, PASSWORD);
-            Utils.Log.success("✅ Connection Success !");
+            Utils.Log.success("Connection Success !");
 //        } catch (ClassNotFoundException e) {
-//            Utils.Log.error("❌ Can't find the MySQL JDBC Driver !");
+//            Utils.Log.error("Can't find the MySQL JDBC Driver !");
 //            e.printStackTrace();
 //            throw e;
         } catch (SQLException e) {
-            Utils.Log.error("❌ Connection Failed", e);
+            Utils.Log.error("Connection Failed", e);
             e.printStackTrace();
             throw e;
         }
@@ -49,18 +49,16 @@ public class Database {
 
     /**
      * Releases the connection with the database
-     * @throws SQLException if a database access error occurs
      */
-    private static void disconnect() throws SQLException {
+    public static void disconnect() {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
                 conn = null;
-                Utils.Log.success("✅ Disconnection Success !");
+                Utils.Log.success("Disconnection Success !");
             }
         } catch (SQLException e){
-            Utils.Log.error("❌ Disconnection Failed !", e);
-            throw e;
+            Utils.Log.error("Disconnection Failed !", e);
         }
     }
 
@@ -71,16 +69,15 @@ public class Database {
      * @throws SQLException if a database access error occurs
      */
     public static ResultSet query(String query) throws SQLException {
-        ResultSet resultSet = null;
-        try(Statement statement = conn.createStatement()) {
+        ResultSet resultSet;
+        try {
             connect();
+            Statement statement = conn.createStatement();
             Utils.Log.info("SELECT statement: " + query + "\n");
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             Utils.Log.error("Problem occurred at select query operation", e);
             throw e;
-        } finally {
-            disconnect();
         }
         return resultSet;
     }
@@ -91,16 +88,16 @@ public class Database {
      * @throws SQLException if a database access error occurs
      */
     public static void update(String query) throws SQLException {
-        try(Statement statement = conn.createStatement()) {
+        try {
             connect();
+            Statement statement = conn.createStatement();
             Utils.Log.info("Update statement: " + query + "\n");
-            //Run executeUpdate operation with given sql statement
+            // Run executeUpdate operation with given sql statement
             statement.executeUpdate(query);
         } catch (SQLException e) {
             Utils.Log.error("Problem occurred at update query operation : " + e);
             throw e;
         } finally {
-            //Close connection
             disconnect();
         }
     }
