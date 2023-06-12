@@ -39,8 +39,7 @@ public class DatabaseController {
                 mainTableView.setPlaceholder(new Label("No rows to display"));
                 return;
             }
-
-            connStateLabel.setText("Connected !");
+            connStateLabel.setText("Success !");
             connStateLabel.setTextFill(Color.GREEN);
 
             Utils.populateTableView(mainTableView, rs);

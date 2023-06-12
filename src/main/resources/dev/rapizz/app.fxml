@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="300.0" minWidth="600.0" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml" fx:controller="dev.rapizz.AppController">
+<VBox minHeight="300.0" minWidth="600.0" prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/" fx:controller="dev.rapizz.AppController">
   <children>
       <HBox alignment="CENTER" minHeight="30.0">
          <children>
