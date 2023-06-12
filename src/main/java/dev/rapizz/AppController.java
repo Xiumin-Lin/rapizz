@@ -1,5 +1,6 @@
 package dev.rapizz;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -16,11 +17,13 @@ public class AppController {
     @FXML
     private Button statisticBtn;
     @FXML
-    private Button testBtn;
+    private SplitMenuButton databaseMenuBtn;
     @FXML
     private Label connStateLabel;
     @FXML
     private BorderPane mainViewPane;
+    @FXML
+    private Label mainTitleLabel;
 
 
     @FXML
@@ -39,19 +42,37 @@ public class AppController {
     }
 
     @FXML
-    protected void onTestButtonClick() {
-        Utils.Log.info("Click on Test Connection");
+    protected void onDatabaseMenuClick() {
+        Utils.Log.info("Click on Default Database Button");
+        loadDatabaseView(DatabaseController.ActionType.SHOW_DB);
+    }
+
+    @FXML
+    protected void onDatabaseMenuItemClick(ActionEvent event) {
+        String btnText = ((MenuItem)event.getSource()).getId();
+        Utils.Log.info("Click on Database Menu Item : " + btnText);
+
+        DatabaseController.ActionType actionType = switch (btnText) {
+            case "createDBItem" -> DatabaseController.ActionType.CREATE_DB;
+            case "addDBItem" -> DatabaseController.ActionType.ADD_DATA_BD;
+            case "dropDBItem" -> DatabaseController.ActionType.DROP_DB;
+            default -> DatabaseController.ActionType.SHOW_DB;
+        };
+        loadDatabaseView(actionType);
+    }
+
+    private void loadDatabaseView(DatabaseController.ActionType actionType) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("connection.fxml"));
-            loader.setController(new ConnectionController(connStateLabel)); // set new controller instance
+            loader.setLocation(getClass().getResource("database.fxml"));
+            loader.setController(new DatabaseController(connStateLabel, actionType)); // set new controller instance
 
             ScrollPane connectionPane = loader.load();
             connectionPane.setFitToHeight(true);
 
             mainViewPane.setCenter(connectionPane);
         } catch (IOException e) {
-            Utils.Log.error("Fail when loading connection.fxml :" + e.getMessage());
+            Utils.Log.error("Fail when loading database.fxml :" + e.getMessage());
             e.printStackTrace();
         }
     }

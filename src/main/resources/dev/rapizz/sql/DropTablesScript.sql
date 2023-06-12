@@ -1,4 +1,5 @@
--- Table drop script --  
+USE Rapizz;
+-- Table drop script --
 DROP TABLE IF EXISTS Compose;
 DROP TABLE IF EXISTS Command;
 DROP TABLE IF EXISTS Vehicle;

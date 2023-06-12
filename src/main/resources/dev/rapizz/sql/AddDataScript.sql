@@ -1,3 +1,4 @@
+USE Rapizz;
 -- Adding data to tables
 
 -- Add ingredients

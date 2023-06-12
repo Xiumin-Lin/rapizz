@@ -2,6 +2,10 @@ package dev.rapizz;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 
 public class Database {
@@ -95,10 +99,44 @@ public class Database {
             // Run executeUpdate operation with given sql statement
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            Utils.Log.error("Problem occurred at update query operation : " + e);
+            Utils.Log.error("Problem occurred at update query operation : " + e.getMessage());
             throw e;
         } finally {
             disconnect();
         }
+    }
+
+    public static void executeUpdateScript(String script) throws SQLException, IOException {
+        try {
+            connect();
+            Statement statement = conn.createStatement();
+            Utils.Log.info("SQL script statement:\n");
+            String[] sqlStatements = script.split(";\\s*"); // regex on ; and all space
+
+            for (int i = 0; i < sqlStatements.length; i++) {
+                int resultCount = statement.executeUpdate(sqlStatements[i].trim());
+                Utils.Log.info("(" + i + ") " + sqlStatements[i] + "\n" + "Updated " + resultCount);
+            }
+            Utils.Log.info("END of SQL script statement");
+        } catch (SQLException e) {
+            Utils.Log.error("Problem occurred at update query operation : " + e.getMessage());
+            throw e;
+        } finally {
+            disconnect();
+        }
+    }
+
+    public static String readSQLFile(URL filePath) throws IOException {
+        StringBuilder content = new StringBuilder();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath.getPath()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line);
+                content.append(System.lineSeparator());
+            }
+        }
+
+        return content.toString();
     }
 }

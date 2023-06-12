@@ -1,5 +1,5 @@
 -- Table creation script --
-CREATE DATABASE IF NOT EXISTS Rapizz;
+CREATE DATABASE IF NOT EXISTS Rapizz CHARACTER SET utf8mb4;
 USE Rapizz;
 
 -- Table containing pizzas available for order

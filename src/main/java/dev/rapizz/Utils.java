@@ -27,6 +27,13 @@ public class Utils {
             err.println("[KO] " + msg);
         }
 
+        public static void error(String msg, Exception e) {
+            error(msg);
+            if(e == null) return;
+            e.printStackTrace(err);
+            err.println("Message: " + e.getMessage());
+        }
+
         public static void error(String msg, SQLException e) {
             error(msg);
             if(e == null) return;
