@@ -55,6 +55,9 @@ public class DatabaseController {
     public void createTablesScript() throws SQLException, IOException {
         String script = Database.readSQLFile(getClass().getResource("sql/CreationTablesScript.sql"));
         Database.executeUpdateScript(script);
+
+        String triggerScript = Database.readSQLFile(getClass().getResource("sql/AddProcedureAndTriggersScript.sql"));
+        Database.executeUpdateScript(triggerScript, "::\\s*");
     }
 
     public void addDataScript() throws SQLException, IOException {

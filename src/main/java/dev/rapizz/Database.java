@@ -106,12 +106,12 @@ public class Database {
         }
     }
 
-    public static void executeUpdateScript(String script) throws SQLException, IOException {
+    public static void executeUpdateScript(String script, String delimiterRegex) throws SQLException {
         try {
             connect();
             Statement statement = conn.createStatement();
             Utils.Log.info("SQL script statement:\n");
-            String[] sqlStatements = script.split(";\\s*"); // regex on ; and all space
+            String[] sqlStatements = script.split(delimiterRegex);
 
             for (int i = 0; i < sqlStatements.length; i++) {
                 int resultCount = statement.executeUpdate(sqlStatements[i].trim());
@@ -124,6 +124,10 @@ public class Database {
         } finally {
             disconnect();
         }
+    }
+
+    public static void executeUpdateScript(String script) throws SQLException {
+        executeUpdateScript(script, ";\\s*"); // regex on ; and all space
     }
 
     public static String readSQLFile(URL filePath) throws IOException {
