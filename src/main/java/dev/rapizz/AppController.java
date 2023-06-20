@@ -44,7 +44,7 @@ public class AppController {
     @FXML
     protected void onDatabaseMenuClick() {
         Utils.Log.info("Click on Default Database Button");
-        loadDatabaseView(DatabaseController.ActionType.SHOW_DB);
+        loadDatabaseView(ConnectionController.ActionType.SHOW_DB);
     }
 
     @FXML
@@ -52,20 +52,20 @@ public class AppController {
         String btnText = ((MenuItem)event.getSource()).getId();
         Utils.Log.info("Click on Database Menu Item : " + btnText);
 
-        DatabaseController.ActionType actionType = switch (btnText) {
-            case "createDBItem" -> DatabaseController.ActionType.CREATE_DB;
-            case "addDBItem" -> DatabaseController.ActionType.ADD_DATA_BD;
-            case "dropDBItem" -> DatabaseController.ActionType.DROP_DB;
-            default -> DatabaseController.ActionType.SHOW_DB;
+        ConnectionController.ActionType actionType = switch (btnText) {
+            case "createDBItem" -> ConnectionController.ActionType.CREATE_DB;
+            case "addDBItem" -> ConnectionController.ActionType.ADD_DATA_BD;
+            case "dropDBItem" -> ConnectionController.ActionType.DROP_DB;
+            default -> ConnectionController.ActionType.SHOW_DB;
         };
         loadDatabaseView(actionType);
     }
 
-    private void loadDatabaseView(DatabaseController.ActionType actionType) {
+    private void loadDatabaseView(ConnectionController.ActionType actionType) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("database.fxml"));
-            loader.setController(new DatabaseController(connStateLabel, actionType)); // set new controller instance
+            loader.setController(new ConnectionController(connStateLabel, actionType)); // set new controller instance
 
             ScrollPane connectionPane = loader.load();
             connectionPane.setFitToHeight(true);

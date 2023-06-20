@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
-public class Database {
+public class Connection {
     // ----- CONNECTION CONSTANTS -----
     public static final String DB_NAME;
     public static final String HOST;
@@ -16,7 +16,7 @@ public class Database {
     public static final String USER;
     private static final String PASSWORD;
     // ----- Attributs -----
-    private static Connection conn;
+    private static java.sql.Connection conn;
 
     static {
         Dotenv dotenv = Dotenv.configure().directory("./src/main/resources").load();
@@ -28,27 +28,27 @@ public class Database {
     }
 
     /**
-     * Enable a connection with the database
-     * @throws SQLException if a database access error occurs
+     * Enable and get a connection with the database if success
      */
-    private static void connect() throws SQLException {
-        String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
-        Utils.Log.success("URL : " + dbUrl);
-
-        try {
-//            Class.forName("com.mysql.jdbc.Driver"); // no need with JDBC 4.0
-//            Utils.Log.success("MySQL JDBC Driver");
-            conn = DriverManager.getConnection(dbUrl, USER, PASSWORD);
-            Utils.Log.success("Connection Success !");
-//        } catch (ClassNotFoundException e) {
-//            Utils.Log.error("Can't find the MySQL JDBC Driver !");
-//            e.printStackTrace();
-//            throw e;
-        } catch (SQLException e) {
-            Utils.Log.error("Connection Failed", e);
-            e.printStackTrace();
-            throw e;
+    public static java.sql.Connection getInstance() {
+        if (conn == null) {
+            String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
+            Utils.Log.success("URL : " + dbUrl);
+            try {
+//                Class.forName("com.mysql.jdbc.Driver"); // no need with JDBC 4.0
+//                Utils.Log.success("MySQL JDBC Driver");
+                conn = DriverManager.getConnection(dbUrl, USER, PASSWORD);
+                Utils.Log.success("Connection Success !");
+//            } catch (ClassNotFoundException e) {
+//                Utils.Log.error("Can't find the MySQL JDBC Driver !");
+//                e.printStackTrace();
+//                throw e;
+            } catch (SQLException e) {
+                Utils.Log.error("A problem has occurred when connecting to the database", e);
+                e.printStackTrace();
+            }
         }
+        return conn;
     }
 
     /**
@@ -61,13 +61,14 @@ public class Database {
                 conn = null;
                 Utils.Log.success("Disconnection Success !");
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             Utils.Log.error("Disconnection Failed !", e);
         }
     }
 
     /**
      * For SELECT statement
+     *
      * @param query the SELECT query to execute
      * @return a ResultSet object that contains the data produced by the given query or null
      * @throws SQLException if a database access error occurs
@@ -75,7 +76,7 @@ public class Database {
     public static ResultSet query(String query) throws SQLException {
         ResultSet resultSet;
         try {
-            connect();
+            getInstance();
             Statement statement = conn.createStatement();
             Utils.Log.info("SELECT statement: " + query + "\n");
             resultSet = statement.executeQuery(query);
@@ -88,12 +89,13 @@ public class Database {
 
     /**
      * For INSERT, UPDATE, or DELETE statement
+     *
      * @param query the update query to execute
      * @throws SQLException if a database access error occurs
      */
     public static void update(String query) throws SQLException {
         try {
-            connect();
+            getInstance();
             Statement statement = conn.createStatement();
             Utils.Log.info("Update statement: " + query + "\n");
             // Run executeUpdate operation with given sql statement
@@ -106,12 +108,12 @@ public class Database {
         }
     }
 
-    public static void executeUpdateScript(String script, String delimiterRegex) throws SQLException {
+    public static void executeUpdateScript(String script, String delimiter) throws SQLException {
         try {
-            connect();
+            getInstance();
             Statement statement = conn.createStatement();
             Utils.Log.info("SQL script statement:\n");
-            String[] sqlStatements = script.split(delimiterRegex);
+            String[] sqlStatements = script.split(delimiter + "\\s*");
 
             for (int i = 0; i < sqlStatements.length; i++) {
                 int resultCount = statement.executeUpdate(sqlStatements[i].trim());
@@ -126,8 +128,13 @@ public class Database {
         }
     }
 
-    public static void executeUpdateScript(String script) throws SQLException {
-        executeUpdateScript(script, ";\\s*"); // regex on ; and all space
+    public static void executeSQLScript(URL filePath, String delimiter) throws SQLException, IOException {
+        String script = Connection.readSQLFile(filePath);
+        executeUpdateScript(script, delimiter); // regex on ; and all space
+    }
+
+    public static void executeSQLScript(URL filePath) throws SQLException, IOException {
+        executeSQLScript(filePath, ";"); // regex on ; and all space
     }
 
     public static String readSQLFile(URL filePath) throws IOException {
