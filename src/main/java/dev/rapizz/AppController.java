@@ -1,15 +1,13 @@
 package dev.rapizz;
 
-import dev.rapizz.model.Pizza;
-import dev.rapizz.model.PizzaDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.List;
 
 public class AppController {
 
@@ -27,7 +25,6 @@ public class AppController {
     private BorderPane mainViewPane;
     @FXML
     private Label mainTitleLabel;
-
 
     @FXML
     protected void onMenuButtonClick() {
@@ -51,6 +48,20 @@ public class AppController {
     @FXML
     protected void onDeliveryButtonClick() {
         Utils.Log.info("Click on delivery");
+        mainTitleLabel.setText("Command Info");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("command.fxml"));
+            loader.setController(new CommandController()); // set new controller instance
+
+            VBox connectionPane = loader.load();
+            connectionPane.setFillWidth(true);
+
+            mainViewPane.setCenter(connectionPane);
+        } catch (IOException e) {
+            Utils.Log.error("Fail when loading menu listview.fxml :" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML

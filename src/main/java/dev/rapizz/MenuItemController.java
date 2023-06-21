@@ -24,7 +24,7 @@ public class MenuItemController {
 
     @FXML
     public void initialize() {
-        picture.setImage(new Image(pizza.getPictureUrl()));
+//        picture.setImage(new Image(pizza.getPictureUrl()));
         item_title.setText(pizza.getName());
         StringBuilder description = new StringBuilder();
         for (Ingredient ing: pizza.getIngredients()) {

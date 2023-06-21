@@ -25,8 +25,7 @@ public class MenuListviewController {
             return;
         }
         for (Pizza pizza: pizzas) {
-            Utils.Log.info(pizza.getName() + " - " + pizza.getIngredients().iterator().next().getName());
-
+//            Utils.Log.info(pizza.getName() + " - " + pizza.getIngredients().iterator().next().getName());
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("menuItemlist.fxml"));

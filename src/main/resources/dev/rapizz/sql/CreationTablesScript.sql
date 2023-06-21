@@ -42,10 +42,10 @@ CREATE TABLE Livreur
 -- Table containing company vehicles
 CREATE TABLE Vehicle
 (
-    id_vehicule INT                     NOT NULL AUTO_INCREMENT,
+    id_vehicle INT                     NOT NULL AUTO_INCREMENT,
     name        CHAR(20)                NOT NULL,
     type        ENUM ('voiture','moto') NOT NULL,
-    PRIMARY KEY (id_vehicule)
+    PRIMARY KEY (id_vehicle)
 );
 
 -- Table containing all customer orders
@@ -68,7 +68,7 @@ CREATE TABLE Command
     id_pizza    INT                           NOT NULL,
     id_size     INT            DEFAULT 1      NOT NULL,
     id_client   INT                           NOT NULL,
-    id_vehicule INT,
+    id_vehicle INT,
     id_livreur  INT                           NOT NULL,
     PRIMARY KEY (id_command)
 );
@@ -86,7 +86,7 @@ ALTER TABLE Command
     ADD CONSTRAINT fk_pizza_command FOREIGN KEY (id_pizza) REFERENCES Pizza (id_pizza),
     ADD CONSTRAINT fk_size_command FOREIGN KEY (id_size) REFERENCES Size (id_size),
     ADD CONSTRAINT fk_client_command FOREIGN KEY (id_client) REFERENCES Client (id_client),
-    ADD CONSTRAINT fk_vehicle_command FOREIGN KEY (id_vehicule) REFERENCES Vehicle (id_vehicule),
+    ADD CONSTRAINT fk_vehicle_command FOREIGN KEY (id_vehicle) REFERENCES Vehicle (id_vehicle),
     ADD CONSTRAINT fk_livreur_command FOREIGN KEY (id_livreur) REFERENCES Livreur (id_livreur);
 
 ALTER TABLE Compose

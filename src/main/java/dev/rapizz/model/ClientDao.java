@@ -16,7 +16,7 @@ public class ClientDao implements IDao<Client> {
                 rs.getString("name"),
                 rs.getDouble("wallet"),
                 rs.getString("address"),
-                rs.getBoolean("isSubscribe")
+                rs.getBoolean("is_subscribe")
         );
     }
 

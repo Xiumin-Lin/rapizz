@@ -28,12 +28,12 @@ VALUES (1, 'Sauce Tomate'),
 INSERT INTO Pizza (id_pizza, name, price, picture_url)
 VALUES (1, 'Margherita', 9.99, 'https://assets.afcdn.com/recipe/20200206/107152_w1024h1024c1cx176cy267.webp'),
        (2, 'Pepperoni', 11.99, 'https://assets.afcdn.com/recipe/20190319/89655_w1024h1024c1cx3680cy2456.webp'),
-       (3, 'Végétarienne', 10.99, 'https://assets.afcdn.com/recipe/20170427/39421_w1024h1024c1cx831cy571.jpg'),
-       (4, 'Hawaïenne', 12.99, 'https://assets.afcdn.com/recipe/20161005/3905_origin.jpg'),
+       (3, 'Vegetarienne', 10.99, 'https://assets.afcdn.com/recipe/20170427/39421_w1024h1024c1cx831cy571.jpg'),
+       (4, 'Hawaienne', 12.99, 'https://assets.afcdn.com/recipe/20161005/3905_origin.jpg'),
        (5, 'Meet Lovers', 13.99, 'https://assets.afcdn.com/recipe/20170323/11766_w1024h768c1cx1728cy1152.webp'),
        (6, 'Poulet BBQ', 11.99, 'https://cdn.shopify.com/s/files/1/0408/5655/1588/articles/bbq_pizza_6534116b-0905-492b-b8c2-3492929cced2.jpg?crop=center&height=800&v=1616496778&width=800'),
        (7, 'Champignons', 10.99, 'https://assets.afcdn.com/recipe/20161130/2342_w1024h1024c1cx2699cy1799.jpg'),
-       (8, 'Suprême', 12.99, 'https://assets.afcdn.com/recipe/20171206/75873_origincxt0cyt0cxb4912cyb3264.jpg'),
+       (8, 'Supreme', 12.99, 'https://assets.afcdn.com/recipe/20171206/75873_origincxt0cyt0cxb4912cyb3264.jpg'),
        (9, 'Quatre Fromages', 11.99, 'https://assets.afcdn.com/recipe/20160926/5624_w1024h1024c1cx1872cy2808.webp'),
        (10, 'Veggie Deluxe', 12.99, 'https://assets.afcdn.com/recipe/20170105/1769_w1024h1024c1cx1824cy2736.jpg');
 
@@ -44,15 +44,15 @@ VALUES (1, 1), -- Margherita - Sauce Tomate
        (2, 1), -- Pepperoni - Sauce Tomate
        (2, 2), -- Pepperoni - Fromage Mozzarella
        (2, 3), -- Pepperoni - Pepperoni
-       (3, 1), -- Végétarienne - Sauce Tomate
-       (3, 2), -- Végétarienne - Fromage Mozzarella
-       (3, 4), -- Végétarienne - Champignons
-       (3, 5), -- Végétarienne - Oignons
-       (3, 6), -- Végétarienne - Poivrons
-       (4, 1), -- Hawaïenne - Sauce Tomate
-       (4, 2), -- Hawaïenne - Fromage Mozzarella
-       (4, 9), -- Hawaïenne - Jambon
-       (4, 10), -- Hawaïenne - Ananas
+       (3, 1), -- Vegetarienne - Sauce Tomate
+       (3, 2), -- Vegetarienne - Fromage Mozzarella
+       (3, 4), -- Vegetarienne - Champignons
+       (3, 5), -- Vegetarienne - Oignons
+       (3, 6), -- Vegetarienne - Poivrons
+       (4, 1), -- Hawaienne - Sauce Tomate
+       (4, 2), -- Hawaienne - Fromage Mozzarella
+       (4, 9), -- Hawaienne - Jambon
+       (4, 10), -- Hawaienne - Ananas
        (5, 1), -- Meet Lovers - Sauce Tomate
        (5, 2), -- Meet Lovers - Fromage Mozzarella
        (5, 3), -- Meet Lovers - Pepperoni
@@ -66,15 +66,15 @@ VALUES (1, 1), -- Margherita - Sauce Tomate
        (7, 2), -- Champignons - Fromage Mozzarella
        (7, 4), -- Champignons - Champignons
        (7, 15), -- Champignons - Ail
-       (8, 1), -- Suprême - Sauce Tomate
-       (8, 2), -- Suprême - Fromage Mozzarella
-       (8, 3), -- Suprême - Pepperoni
-       (8, 4), -- Suprême - Champignons
-       (8, 5), -- Suprême - Oignons
-       (8, 6), -- Suprême - Poivrons
-       (8, 7), -- Suprême - Olives
-       (8, 8), -- Suprême - Bacon
-       (8, 9), -- Suprême - Jambon
+       (8, 1), -- Supreme - Sauce Tomate
+       (8, 2), -- Supreme - Fromage Mozzarella
+       (8, 3), -- Supreme - Pepperoni
+       (8, 4), -- Supreme - Champignons
+       (8, 5), -- Supreme - Oignons
+       (8, 6), -- Supreme - Poivrons
+       (8, 7), -- Supreme - Olives
+       (8, 8), -- Supreme - Bacon
+       (8, 9), -- Supreme - Jambon
        (9, 2), -- Quatre Fromages - Fromage Mozzarella
        (9, 12), -- Quatre Fromages - Fromage Feta
        (9, 13), -- Quatre Fromages - Parmesan
@@ -95,7 +95,7 @@ VALUES (1, 'Dominic Toretto'),
 (3, 'Luke Hobbs');
 
 -- Add vehicles
-INSERT INTO Vehicle (id_vehicule, name, type)
+INSERT INTO Vehicle (id_vehicle, name, type)
 VALUES (1, 'Dodge Charger', 'voiture'),
 (2, 'Toyota Supra', 'voiture'),
 (3, 'Yamaha YZF-R1', 'moto');
@@ -133,7 +133,7 @@ VALUES
   (3, 'ogresse', 4/3);  -- 1/3 plus chere
 
 -- Add commands
-INSERT INTO Command (id_command, id_size, status, date_start, date_end, id_pizza, id_client, id_vehicule, id_livreur)
+INSERT INTO Command (id_command, id_size, status, date_start, date_end, id_pizza, id_client, id_vehicle, id_livreur)
 VALUES
   (1, 2, 'finish', '2023-06-20 10:00:00', '2023-06-20 10:10:00', 5, 1, 1, 1),
   (2, 2, 'finish', '2023-06-20 11:00:00', '2023-06-20 11:11:00', 2, 2, 1, 2),
