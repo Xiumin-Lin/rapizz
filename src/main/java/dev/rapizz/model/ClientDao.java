@@ -31,7 +31,7 @@ public class ClientDao implements IDao<Client> {
                 return Optional.of(client);
             }
         } catch (SQLException e) {
-            Utils.Log.error("Error when retrieving pizza id: " + id, e);
+            Utils.Log.error("Error when retrieving client id: " + id, e);
         }
 
         return Optional.empty();
@@ -39,19 +39,19 @@ public class ClientDao implements IDao<Client> {
 
     @Override
     public List<Client> getAll() {
-        List<Client> ingredients = new ArrayList<>();
+        List<Client> clients = new ArrayList<>();
         Connection conn = ConnectionManager.getInstance();
         try (Statement statement = conn.createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT * FROM Client");
             while (rs.next()) {
                 Client client = parseResultSetToClient(rs);
-                ingredients.add(client);
+                clients.add(client);
             }
         } catch (SQLException e) {
             Utils.Log.error("Error when retrieving all Client of table Client", e);
         }
 
-        return ingredients;
+        return clients;
     }
 
     @Override
