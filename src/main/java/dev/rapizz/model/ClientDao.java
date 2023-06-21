@@ -21,20 +21,19 @@ public class ClientDao implements IDao<Client> {
     }
 
     @Override
-    public Optional<Client> getById(int id) {
+    public Client getById(int id) {
         Connection conn = ConnectionManager.getInstance();
         try(PreparedStatement statement = conn.prepareStatement("SELECT * FROM Client WHERE id_client = ?")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Client client = parseResultSetToClient(rs);
-                return Optional.of(client);
+                return parseResultSetToClient(rs);
             }
         } catch (SQLException e) {
             Utils.Log.error("Error when retrieving client id: " + id, e);
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override

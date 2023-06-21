@@ -12,20 +12,19 @@ public class IngredientDao implements IDao<Ingredient> {
     }
 
     @Override
-    public Optional<Ingredient> getById(int id) {
+    public Ingredient getById(int id) {
         Connection conn = ConnectionManager.getInstance();
         try(PreparedStatement statement = conn.prepareStatement("SELECT * FROM ingredient WHERE id_ingredient = ?")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Ingredient ingredient = parseResultSetToIngredient(rs);
-                return Optional.of(ingredient);
+                return parseResultSetToIngredient(rs);
             }
         } catch (SQLException e) {
             Utils.Log.error("Error when retrieving pizza id: " + id, e);
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override

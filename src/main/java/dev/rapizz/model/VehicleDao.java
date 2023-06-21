@@ -18,20 +18,19 @@ public class VehicleDao implements IDao<Vehicle> {
     }
 
     @Override
-    public Optional<Vehicle> getById(int id) {
+    public Vehicle getById(int id) {
         Connection conn = ConnectionManager.getInstance();
         try(PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vehicle WHERE id_vehicle = ?")) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                Vehicle vehicle = parseResultSetToVehicle(rs);
-                return Optional.of(vehicle);
+                return parseResultSetToVehicle(rs);
             }
         } catch (SQLException e) {
             Utils.Log.error("Error when retrieving Vehicle id: " + id, e);
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -53,16 +52,16 @@ public class VehicleDao implements IDao<Vehicle> {
 
     @Override
     public Vehicle create(Vehicle p) {
-        throw new RuntimeException("Not yet implemented for Create Client");
+        throw new RuntimeException("Not yet implemented for Create Vehicle");
     }
 
     @Override
     public Vehicle update(Vehicle p) {
-        throw new RuntimeException("Not yet implemented for Update Client");
+        throw new RuntimeException("Not yet implemented for Update Vehicle");
     }
 
     @Override
     public void delete(Vehicle p) {
-        throw new RuntimeException("Not yet implemented for Delete Client");
+        throw new RuntimeException("Not yet implemented for Delete Vehicle");
     }
 }

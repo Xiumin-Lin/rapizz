@@ -18,7 +18,7 @@ public class PizzaDao implements IDao<Pizza> {
     }
 
     @Override
-    public Optional<Pizza> getById(int id) {
+    public Pizza getById(int id) {
         Connection conn = ConnectionManager.getInstance();
         try(PreparedStatement statement = conn.prepareStatement("SELECT * FROM Pizza WHERE id_pizza = ?")) {
             statement.setInt(1, id);
@@ -26,13 +26,13 @@ public class PizzaDao implements IDao<Pizza> {
             if (rs.next()) {
                 Pizza pizza = parseResultSetToPizza(rs);
                 pizza.getIngredients().addAll(new IngredientDao().getAllByPizzaId(id));
-                return Optional.of(pizza);
+                return pizza;
             }
         } catch (SQLException e) {
             Utils.Log.error("Error when retrieving pizza id: " + id, e);
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface IDao<T> {
      * @param id the ID of the object to find
      * @return an optional containing the retrieved object, or empty if not found
      */
-    Optional<T> getById(int id);
+    T getById(int id);
 
     /**
      * Get all objects of the given type.
