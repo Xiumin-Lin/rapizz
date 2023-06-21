@@ -32,7 +32,7 @@ public class AppController {
         mainTitleLabel.setText("List of pizza !");
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("listview.fxml"));
+            loader.setLocation(getClass().getResource("menu_list.fxml"));
             loader.setController(new MenuListviewController()); // set new controller instance
 
             ScrollPane connectionPane = loader.load();
@@ -40,7 +40,7 @@ public class AppController {
 
             mainViewPane.setCenter(connectionPane);
         } catch (IOException e) {
-            Utils.Log.error("Fail when loading menu listview.fxml :" + e.getMessage());
+            Utils.Log.error("Fail when loading menu_list.fxml :" + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -59,7 +59,7 @@ public class AppController {
 
             mainViewPane.setCenter(connectionPane);
         } catch (IOException e) {
-            Utils.Log.error("Fail when loading menu listview.fxml :" + e.getMessage());
+            Utils.Log.error("Fail when loading menu command.fxml :" + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -67,6 +67,19 @@ public class AppController {
     @FXML
     protected void onStatisticButtonClick() {
         Utils.Log.info("Click on Statistic");
+        mainTitleLabel.setText("Stats");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("stats.fxml"));
+            loader.setController(new StatistiqueController()); // set new controller instance
+
+            TabPane connectionPane = loader.load();
+
+            mainViewPane.setCenter(connectionPane);
+        } catch (IOException e) {
+            Utils.Log.error("Fail when loading stats.fxml :" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -93,7 +106,7 @@ public class AppController {
     private void loadDatabaseView(ConnectionController.ActionType actionType) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("database.fxml"));
+            loader.setLocation(getClass().getResource("connection.fxml"));
             loader.setController(new ConnectionController(connStateLabel, actionType)); // set new controller instance
 
             ScrollPane connectionPane = loader.load();
@@ -101,7 +114,7 @@ public class AppController {
 
             mainViewPane.setCenter(connectionPane);
         } catch (IOException e) {
-            Utils.Log.error("Fail when loading database.fxml :" + e.getMessage());
+            Utils.Log.error("Fail when loading connection.fxml :" + e.getMessage());
             e.printStackTrace();
         }
     }
