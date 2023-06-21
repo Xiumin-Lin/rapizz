@@ -40,7 +40,7 @@ public class IngredientDao implements IDao<Ingredient> {
                 ingredients.add(ing);
             }
         } catch (SQLException e) {
-            Utils.Log.error("Error when retrieving all Pizza of table Pizza", e);
+            Utils.Log.error("Error when retrieving all Ingredient of table Ingredient", e);
         }
 
         return ingredients;
@@ -67,16 +67,16 @@ public class IngredientDao implements IDao<Ingredient> {
 
     @Override
     public Ingredient create(Ingredient p) {
-        throw new RuntimeException("Not yet implemented for Create Pizza");
+        throw new RuntimeException("Not yet implemented for Create Ingredient");
     }
 
     @Override
     public Ingredient update(Ingredient p) {
-        throw new RuntimeException("Not yet implemented for Update Pizza");
+        throw new RuntimeException("Not yet implemented for Update Ingredient");
     }
 
     @Override
     public void delete(Ingredient p) {
-        throw new RuntimeException("Not yet implemented for Delete Pizza");
+        throw new RuntimeException("Not yet implemented for Delete Ingredient");
     }
 }
