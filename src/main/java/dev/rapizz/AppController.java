@@ -1,5 +1,7 @@
 package dev.rapizz;
 
+import dev.rapizz.model.Pizza;
+import dev.rapizz.model.PizzaDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AppController {
 
@@ -29,6 +32,10 @@ public class AppController {
     @FXML
     protected void onMenuButtonClick() {
         Utils.Log.info("Click on menu");
+        List<Pizza> pizzas = new PizzaDao().getAll();
+        for (Pizza p: pizzas) {
+            Utils.Log.info(p.getName() + " - " + p.getIngredients().iterator().next().getName());
+        }
     }
 
     @FXML

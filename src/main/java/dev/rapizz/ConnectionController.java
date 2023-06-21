@@ -30,8 +30,8 @@ public class ConnectionController {
                 case CREATE_DB -> createTablesScript();
             }
 
-            String query = Connection.readSQLFile(getClass().getResource("sql/ShowDatabase.sql"));
-            ResultSet rs = Connection.query(query);
+            String query = ConnectionManager.readSQLFile(getClass().getResource("sql/ShowDatabase.sql"));
+            ResultSet rs = ConnectionManager.query(query);
 
             if(rs == null) {
                 connStateLabel.setText("No results !");
@@ -48,21 +48,21 @@ public class ConnectionController {
             connStateLabel.setTextFill(Color.RED);
             Utils.Log.error("Error when initialize ConnectionController.", e);
         } finally {
-            Connection.disconnect();
+            ConnectionManager.disconnect();
         }
     }
 
     public void createTablesScript() throws SQLException, IOException {
-        Connection.executeSQLScript(getClass().getResource("sql/CreationTablesScript.sql"));
+        ConnectionManager.executeSQLScript(getClass().getResource("sql/CreationTablesScript.sql"));
 
-        Connection.executeSQLScript(getClass().getResource("sql/AddProcedureAndTriggersScript.sql"), "::");
+        ConnectionManager.executeSQLScript(getClass().getResource("sql/AddProcedureAndTriggersScript.sql"), "::");
     }
 
     public void addDataScript() throws SQLException, IOException {
-        Connection.executeSQLScript(getClass().getResource("sql/AddDataScript.sql"));
+        ConnectionManager.executeSQLScript(getClass().getResource("sql/AddDataScript.sql"));
     }
 
     public void dropTablesScript() throws SQLException, IOException {
-        Connection.executeSQLScript(getClass().getResource("sql/DropTablesScript.sql"));
+        ConnectionManager.executeSQLScript(getClass().getResource("sql/DropTablesScript.sql"));
     }
 }

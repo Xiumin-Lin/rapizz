@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
-public class Connection {
+public class ConnectionManager {
     // ----- CONNECTION CONSTANTS -----
     public static final String DB_NAME;
     public static final String HOST;
@@ -16,7 +16,7 @@ public class Connection {
     public static final String USER;
     private static final String PASSWORD;
     // ----- Attributs -----
-    private static java.sql.Connection conn;
+    private static Connection conn;
 
     static {
         Dotenv dotenv = Dotenv.configure().directory("./src/main/resources").load();
@@ -30,7 +30,7 @@ public class Connection {
     /**
      * Enable and get a connection with the database if success
      */
-    public static java.sql.Connection getInstance() {
+    public static Connection getInstance() {
         if (conn == null) {
             String dbUrl = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
             Utils.Log.success("URL : " + dbUrl);
@@ -129,7 +129,7 @@ public class Connection {
     }
 
     public static void executeSQLScript(URL filePath, String delimiter) throws SQLException, IOException {
-        String script = Connection.readSQLFile(filePath);
+        String script = ConnectionManager.readSQLFile(filePath);
         executeUpdateScript(script, delimiter); // regex on ; and all space
     }
 

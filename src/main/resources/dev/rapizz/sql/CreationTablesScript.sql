@@ -5,7 +5,7 @@ USE Rapizz;
 -- Table containing pizzas available for order
 CREATE TABLE Pizza
 (
-    id_pizza    INT,
+    id_pizza    INT            NOT NULL AUTO_INCREMENT,
     name        CHAR(30),
     price       DECIMAL(10, 2) NOT NULL,
     picture_url TEXT(300),
@@ -15,7 +15,7 @@ CREATE TABLE Pizza
 -- Table of possible ingredients for creating a pizza
 CREATE TABLE Ingredient
 (
-    id_ingredient INT,
+    id_ingredient INT NOT NULL AUTO_INCREMENT,
     name          CHAR(20),
     PRIMARY KEY (id_ingredient)
 );
@@ -23,7 +23,7 @@ CREATE TABLE Ingredient
 -- Table containing the company's customers
 CREATE TABLE Client
 (
-    id_client    INT,
+    id_client    INT            NOT NULL AUTO_INCREMENT,
     name         CHAR(30),
     wallet       DECIMAL(10, 2) NOT NULL,
     address      CHAR(150)      NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE Client
 -- Table containing the company's delivery personnel
 CREATE TABLE Livreur
 (
-    id_livreur INT,
+    id_livreur INT      NOT NULL AUTO_INCREMENT,
     name       CHAR(30) NOT NULL,
     PRIMARY KEY (id_livreur)
 );
@@ -42,7 +42,7 @@ CREATE TABLE Livreur
 -- Table containing company vehicles
 CREATE TABLE Vehicle
 (
-    id_vehicule VARCHAR(50),
+    id_vehicule INT                     NOT NULL AUTO_INCREMENT,
     name        CHAR(20)                NOT NULL,
     type        ENUM ('voiture','moto') NOT NULL,
     PRIMARY KEY (id_vehicule)
@@ -51,7 +51,7 @@ CREATE TABLE Vehicle
 -- Table containing all customer orders
 CREATE TABLE Size
 (
-    id_size        INT,
+    id_size        INT      NOT NULL AUTO_INCREMENT,
     name           CHAR(20) NOT NULL,
     price_modifier FLOAT DEFAULT 1,
     PRIMARY KEY (id_size)
@@ -60,7 +60,7 @@ CREATE TABLE Size
 -- Table containing all customer orders
 CREATE TABLE Command
 (
-    id_command  INT,
+    id_command  INT                           NOT NULL AUTO_INCREMENT,
     price       DECIMAL(10, 2) DEFAULT -1,
     status      ENUM ('in progress','finish') NOT NULL,
     date_start  DATETIME                      NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE Command
     id_pizza    INT                           NOT NULL,
     id_size     INT            DEFAULT 1      NOT NULL,
     id_client   INT                           NOT NULL,
-    id_vehicule VARCHAR(50),
+    id_vehicule INT,
     id_livreur  INT                           NOT NULL,
     PRIMARY KEY (id_command)
 );
@@ -76,8 +76,8 @@ CREATE TABLE Command
 -- Table for linking pizzas with ingredients
 CREATE TABLE Compose
 (
-    id_pizza      INT,
-    id_ingredient INT,
+    id_pizza      INT NOT NULL,
+    id_ingredient INT NOT NULL,
     PRIMARY KEY (id_pizza, id_ingredient)
 );
 
