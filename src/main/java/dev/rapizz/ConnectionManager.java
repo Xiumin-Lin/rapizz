@@ -137,6 +137,11 @@ public class ConnectionManager {
         executeSQLScript(filePath, ";"); // regex on ; and all space
     }
 
+    public static ResultSet executeOneQueryScript(URL filePath) throws SQLException, IOException {
+        String script = ConnectionManager.readSQLFile(filePath);
+        return query(script);
+    }
+
     public static String readSQLFile(URL filePath) throws IOException {
         StringBuilder content = new StringBuilder();
 

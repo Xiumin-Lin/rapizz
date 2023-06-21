@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -37,6 +38,7 @@ public class StatistiqueController {
 
     private void initGlobalStats() {
         chiffreAffaires.setText(getCA() + " €");
+        bestClient.setText(getBestClient());
     }
 
     private String getCA() {
@@ -45,10 +47,22 @@ public class StatistiqueController {
                 return rs.getString("chiffre_affaire");
             }
         } catch (SQLException e){
-            Utils.Log.error("get", e);
+            Utils.Log.error("Error on getCA()", e);
         }
         return null;
     }
 
+    private String getBestClient() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/BestClient.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                String total_amount = rs.getString("total_amount");
+                return name + " (" + total_amount + " €)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getBestClient()", e);
+        }
+        return null;
+    }
 
 }

@@ -1,5 +1,3 @@
-USE Rapizz;
-
 SELECT c.id_client, c.name
 FROM Client c
     JOIN Command cmd ON c.id_client = cmd.id_client
