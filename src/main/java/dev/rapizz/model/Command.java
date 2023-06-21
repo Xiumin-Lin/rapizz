@@ -1,6 +1,7 @@
 package dev.rapizz.model;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Command {
     private final int id_command;
@@ -66,5 +67,13 @@ public class Command {
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public long getDurationInMinutes() {
+        if(date_end == null) return 0;
+
+        long durationInMillis = date_end.getTime() - date_start.getTime();
+        long min = TimeUnit.MILLISECONDS.toMinutes(durationInMillis);
+        return min > 0 ? min : 0;
     }
 }

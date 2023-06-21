@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane minWidth="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<ScrollPane minWidth="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml">
    <content>
       <VBox fx:id="list_vbox" spacing="5.0">
          <padding>
