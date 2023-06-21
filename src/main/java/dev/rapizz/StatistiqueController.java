@@ -37,14 +37,16 @@ public class StatistiqueController {
     }
 
     private void initGlobalStats() {
-        chiffreAffaires.setText(getCA() + " €");
+        chiffreAffaires.setText(getCA());
         bestClient.setText(getBestClient());
+        bestLivreur.setText(getBestLivreur());
+        worstLivreur.setText(getWorstLivreur());
     }
 
     private String getCA() {
         try(ResultSet rs = ConnectionManager.query("SELECT SUM(price) AS chiffre_affaire FROM Command WHERE status = 'finish'")) {
             if (rs.next()) {
-                return rs.getString("chiffre_affaire");
+                return rs.getString("chiffre_affaire") + " €";
             }
         } catch (SQLException e){
             Utils.Log.error("Error on getCA()", e);
@@ -56,11 +58,37 @@ public class StatistiqueController {
         try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/BestClient.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
-                String total_amount = rs.getString("total_amount");
+                int total_amount = rs.getInt("total_amount");
                 return name + " (" + total_amount + " €)";
             }
         } catch (Exception e){
             Utils.Log.error("Error on getBestClient()", e);
+        }
+        return null;
+    }
+
+    private String getBestLivreur() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/BestLivreur.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_livraison = rs.getInt("nb_livraison");
+                return name + " (" + nb_livraison + " livraisons réussies)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getBestLivreur()", e);
+        }
+        return null;
+    }
+
+    private String getWorstLivreur() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/WorstLivreur.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_retards = rs.getInt("nb_retards");
+                return name + " (" + nb_retards + " retards)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getWorstLivreur()", e);
         }
         return null;
     }
