@@ -32,9 +32,19 @@ public class AppController {
     @FXML
     protected void onMenuButtonClick() {
         Utils.Log.info("Click on menu");
-        List<Pizza> pizzas = new PizzaDao().getAll();
-        for (Pizza p: pizzas) {
-            Utils.Log.info(p.getName() + " - " + p.getIngredients().iterator().next().getName());
+        mainTitleLabel.setText("List of pizza !");
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("listview.fxml"));
+            loader.setController(new MenuListviewController()); // set new controller instance
+
+            ScrollPane connectionPane = loader.load();
+            connectionPane.setFitToHeight(true);
+
+            mainViewPane.setCenter(connectionPane);
+        } catch (IOException e) {
+            Utils.Log.error("Fail when loading menu listview.fxml :" + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -65,6 +75,7 @@ public class AppController {
             case "dropDBItem" -> ConnectionController.ActionType.DROP_DB;
             default -> ConnectionController.ActionType.SHOW_DB;
         };
+        mainTitleLabel.setText(actionType.name());
         loadDatabaseView(actionType);
     }
 

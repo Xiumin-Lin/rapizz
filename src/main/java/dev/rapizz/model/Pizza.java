@@ -20,7 +20,7 @@ public class Pizza {
     public Pizza(int id, String name, double price, String pictureUrl) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.price = Math.round(price * 100.0) / 100.0;;
         this.pictureUrl = pictureUrl;
         this.ingredients = new HashSet<>();
     }

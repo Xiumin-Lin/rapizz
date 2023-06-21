@@ -12,7 +12,7 @@ public class PizzaDao implements IDao<Pizza> {
         return new Pizza(
                 rs.getInt("id_pizza"),
                 rs.getString("name"),
-                rs.getFloat("price"),
+                rs.getDouble("price"),
                 rs.getString("picture_url")
         );
     }

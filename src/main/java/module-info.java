@@ -8,4 +8,5 @@ module dev.rapizz {
 
     opens dev.rapizz to javafx.fxml;
     exports dev.rapizz;
+    exports dev.rapizz.model;
 }
