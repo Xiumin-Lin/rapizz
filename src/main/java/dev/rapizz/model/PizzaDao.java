@@ -4,7 +4,8 @@ import dev.rapizz.ConnectionManager;
 import dev.rapizz.Utils;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PizzaDao implements IDao<Pizza> {
 

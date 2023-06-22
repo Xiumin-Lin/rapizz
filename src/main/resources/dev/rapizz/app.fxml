@@ -59,7 +59,7 @@
             </SplitPane>
             <BorderPane fx:id="mainViewPane">
                <top>
-                  <Label fx:id="mainTitleLabel" text="ViewTitleLabel" BorderPane.alignment="CENTER_LEFT">
+                  <Label fx:id="mainTitleLabel" text="Welcome to RaPizz ! Be sure to test your connection with the database before using these buttons." BorderPane.alignment="CENTER_LEFT">
                      <font>
                         <Font name="Segoe UI Bold" size="14.0" />
                      </font>

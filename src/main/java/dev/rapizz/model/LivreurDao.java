@@ -6,7 +6,6 @@ import dev.rapizz.Utils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class LivreurDao implements IDao<Livreur> {
     public Livreur parseResultSetToLivreur(ResultSet rs) throws SQLException {

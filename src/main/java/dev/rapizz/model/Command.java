@@ -3,7 +3,6 @@ package dev.rapizz.model;
 import dev.rapizz.Utils;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Command {
@@ -77,7 +76,6 @@ public class Command {
 
         long durationInMillis = date_end.getTime() - date_start.getTime();
         long min = TimeUnit.MILLISECONDS.toMinutes(durationInMillis);
-        Utils.Log.info(this.id_command + ": " + date_start + ", " + date_end + " = " + min);
         return Math.max(min, 0);
     }
 }

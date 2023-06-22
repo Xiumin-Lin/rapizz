@@ -4,7 +4,9 @@ import dev.rapizz.ConnectionManager;
 import dev.rapizz.Utils;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class IngredientDao implements IDao<Ingredient> {
     public Ingredient parseResultSetToIngredient(ResultSet rs) throws SQLException {

@@ -1,6 +1,6 @@
 package dev.rapizz.model;
+
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interface representing a generic DAO (Data Access Object) for CRUD operations.

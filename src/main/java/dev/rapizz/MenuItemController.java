@@ -3,7 +3,6 @@ package dev.rapizz;
 import dev.rapizz.model.Ingredient;
 import dev.rapizz.model.Pizza;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 

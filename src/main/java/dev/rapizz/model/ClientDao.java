@@ -5,9 +5,7 @@ import dev.rapizz.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 public class ClientDao implements IDao<Client> {
     public Client parseResultSetToClient(ResultSet rs) throws SQLException {

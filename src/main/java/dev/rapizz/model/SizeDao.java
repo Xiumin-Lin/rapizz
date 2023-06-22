@@ -6,7 +6,6 @@ import dev.rapizz.Utils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class SizeDao implements IDao<Size> {
     public Size parseResultSetToSize(ResultSet rs) throws SQLException {

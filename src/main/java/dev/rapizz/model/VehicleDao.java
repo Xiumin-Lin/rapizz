@@ -6,7 +6,6 @@ import dev.rapizz.Utils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class VehicleDao implements IDao<Vehicle> {
     public Vehicle parseResultSetToVehicle(ResultSet rs) throws SQLException {
