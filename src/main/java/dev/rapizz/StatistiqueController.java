@@ -58,7 +58,7 @@ public class StatistiqueController {
     }
 
     private String getBestClient() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestClient.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/BestClient.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int total_amount = rs.getInt("total_amount");
@@ -71,7 +71,7 @@ public class StatistiqueController {
     }
 
     private String getBestLivreur() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestLivreur.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/BestLivreur.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_livraison = rs.getInt("nb_livraison");
@@ -84,7 +84,7 @@ public class StatistiqueController {
     }
 
     private String getWorstLivreur() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/WorstLivreur.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/WorstLivreur.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_retards = rs.getInt("nb_retards");
@@ -97,7 +97,7 @@ public class StatistiqueController {
     }
 
     private String getBestVehicle() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestVehicle.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/BestVehicle.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_utilisations = rs.getInt("nb_utilisations");
@@ -110,7 +110,7 @@ public class StatistiqueController {
     }
 
     private String getBestPizza() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestPizza.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/BestPizza.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_commandes = rs.getInt("nb_commandes");
@@ -123,7 +123,7 @@ public class StatistiqueController {
     }
 
     private String getWorstPizza() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/WorstPizza.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/WorstPizza.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_commandes = rs.getInt("nb_commandes");
@@ -136,7 +136,7 @@ public class StatistiqueController {
     }
 
     private String getFavIngredient() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/FavIngredient.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/one/FavIngredient.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_occurrences = rs.getInt("nb_occurrences");
@@ -152,7 +152,7 @@ public class StatistiqueController {
     private ListView<String> vehicleListView;
 
     public void initUnusedVehicleListView() {
-        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/UnusedVehicle.sql"))) {
+        try (ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation("query/UnusedVehicle.sql"))) {
             List<String> list = new ArrayList<>();
 
             while (rs.next()) {
@@ -170,11 +170,8 @@ public class StatistiqueController {
         }
     }
 
-    @FXML
-    private ListView<String> clientListView;
-
-    public void initClientListView() {
-        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/CommandsByClient.sql"))) {
+    public void initClientListView(String sqlScriptPath, ListView<String> listView) {
+        try (ResultSet rs = ConnectionManager.executeOneQueryScript(Utils.getSqlLocation(sqlScriptPath))) {
             List<String> list = new ArrayList<>();
 
             while (rs.next()) {
@@ -186,31 +183,23 @@ public class StatistiqueController {
                 list.add(clientStr);
             }
 
-            clientListView.getItems().addAll(list);
+            listView.getItems().addAll(list);
         } catch (Exception e) {
-            Utils.Log.error("Error on getFavIngredient()", e);
+            Utils.Log.error("Error on initClientListView()", e);
         }
+    }
+
+    @FXML
+    private ListView<String> clientListView;
+
+    public void initClientListView() {
+        initClientListView("query/CommandsByClient.sql", clientListView);
     }
 
     @FXML
     private ListView<String> regularClientListView;
 
     public void initRegularClientListView() {
-        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/MostRegularClients.sql"))) {
-            List<String> list = new ArrayList<>();
-
-            while (rs.next()) {
-                int idClient = rs.getInt("id_client");
-                String name = rs.getString("name");
-                int nb_command = rs.getInt("nb_command");
-
-                String clientStr = String.format("(ID %d) %s has ordered %d times", idClient, name, nb_command);
-                list.add(clientStr);
-            }
-
-            regularClientListView.getItems().addAll(list);
-        } catch (Exception e) {
-            Utils.Log.error("Error on getFavIngredient()", e);
-        }
+        initClientListView("query/MostRegularClients.sql", regularClientListView);
     }
 }

@@ -32,7 +32,7 @@ public class AppController {
         mainTitleLabel.setText("List of pizza !");
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("menu_list.fxml"));
+            loader.setLocation(Utils.getFxmlLocation("menu_list.fxml"));
             loader.setController(new MenuListviewController()); // set new controller instance
 
             ScrollPane connectionPane = loader.load();
@@ -51,7 +51,7 @@ public class AppController {
         mainTitleLabel.setText("Command Info");
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("command.fxml"));
+            loader.setLocation(Utils.getFxmlLocation("command.fxml"));
             loader.setController(new CommandController()); // set new controller instance
 
             VBox connectionPane = loader.load();
@@ -70,7 +70,7 @@ public class AppController {
         mainTitleLabel.setText("Stats");
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("stats.fxml"));
+            loader.setLocation(Utils.getFxmlLocation("stats.fxml"));
             loader.setController(new StatistiqueController()); // set new controller instance
 
             TabPane connectionPane = loader.load();
@@ -106,7 +106,7 @@ public class AppController {
     private void loadDatabaseView(ConnectionController.ActionType actionType) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("connection.fxml"));
+            loader.setLocation(Utils.getFxmlLocation("connection.fxml"));
             loader.setController(new ConnectionController(connStateLabel, actionType)); // set new controller instance
 
             ScrollPane connectionPane = loader.load();

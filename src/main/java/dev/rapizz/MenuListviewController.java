@@ -28,7 +28,7 @@ public class MenuListviewController {
 //            Utils.Log.info(pizza.getName() + " - " + pizza.getIngredients().iterator().next().getName());
             try {
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("menu_item_list.fxml"));
+                loader.setLocation(Utils.getFxmlLocation("menu_item_list.fxml"));
                 loader.setController(new MenuItemController(pizza)); // set new controller instance
 
                 HBox connectionPane = loader.load();

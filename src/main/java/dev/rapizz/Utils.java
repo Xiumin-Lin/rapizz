@@ -7,11 +7,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.PrintStream;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class Utils {
+    public static URL getFxmlLocation(String path) {
+        return Utils.class.getResource("fxml/" + path);
+    }
+
+    public static URL getSqlLocation(String path) {
+        return Utils.class.getResource("sql/" + path);
+    }
+
     public static class Log {
         private static final PrintStream out = System.out;
         private static final PrintStream err = System.err;

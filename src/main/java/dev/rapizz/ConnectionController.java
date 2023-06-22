@@ -30,7 +30,7 @@ public class ConnectionController {
                 case CREATE_DB -> createTablesScript();
             }
 
-            String query = ConnectionManager.readSQLFile(getClass().getResource("sql/ShowDatabase.sql"));
+            String query = ConnectionManager.readSQLFile(Utils.getSqlLocation("ShowDatabase.sql"));
             ResultSet rs = ConnectionManager.query(query);
 
             if(rs == null) {
@@ -53,16 +53,16 @@ public class ConnectionController {
     }
 
     public void createTablesScript() throws SQLException, IOException {
-        ConnectionManager.executeSQLScript(getClass().getResource("sql/CreationTablesScript.sql"));
+        ConnectionManager.executeSQLScript(Utils.getSqlLocation("CreationTablesScript.sql"));
 
-        ConnectionManager.executeSQLScript(getClass().getResource("sql/AddProcedureAndTriggersScript.sql"), "::");
+        ConnectionManager.executeSQLScript(Utils.getSqlLocation("AddProcedureAndTriggersScript.sql"), "::");
     }
 
     public void addDataScript() throws SQLException, IOException {
-        ConnectionManager.executeSQLScript(getClass().getResource("sql/AddDataScript.sql"));
+        ConnectionManager.executeSQLScript(Utils.getSqlLocation("AddDataScript.sql"));
     }
 
     public void dropTablesScript() throws SQLException, IOException {
-        ConnectionManager.executeSQLScript(getClass().getResource("sql/DropTablesScript.sql"));
+        ConnectionManager.executeSQLScript(Utils.getSqlLocation("DropTablesScript.sql"));
     }
 }
