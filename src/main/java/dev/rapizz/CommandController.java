@@ -68,7 +68,7 @@ public class CommandController {
         dateStart.setText(c.getDate_start().toString());
         statusValue.setText(c.getStatus());
         deliveryTime.setText(c.getDurationInMinutes() + " min");
-        totalPrice.setText(c.getPrice() + " €");
+        totalPrice.setText("Total price : " + c.getPrice() + " €");
     }
 
     @FXML
