@@ -28,8 +28,8 @@
                   <Pane prefWidth="200.0" />
                   <GridPane prefWidth="680.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="0.0" prefWidth="185.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="475.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="0.0" prefWidth="229.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="495.0" minWidth="10.0" prefWidth="431.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -42,82 +42,82 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label contentDisplay="CENTER" text="Chiffre d'affaires" textAlignment="CENTER" GridPane.vgrow="ALWAYS">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Chiffre d'affaires" textAlignment="CENTER" GridPane.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="chiffreAffaires" strokeType="OUTSIDE" strokeWidth="0.0" text="? €" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+                        <Text fx:id="chiffreAffaires" strokeType="OUTSIDE" strokeWidth="0.0" text="? €" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Meilleur client" textAlignment="CENTER" GridPane.rowIndex="1">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Meilleur client" textAlignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="bestClient" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Text fx:id="bestClient" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Meilleur livreur" textAlignment="CENTER" GridPane.rowIndex="2">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Meilleur livreur" textAlignment="CENTER" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="bestLivreur" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Text fx:id="bestLivreur" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Pire livreur" textAlignment="CENTER" GridPane.rowIndex="3">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Pire livreur" textAlignment="CENTER" GridPane.rowIndex="3">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="worstLivreur" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Text fx:id="worstLivreur" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Véhicule le + utilisé" textAlignment="CENTER" GridPane.rowIndex="4">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Véhicule le + utilisé" textAlignment="CENTER" GridPane.rowIndex="4">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="bestVehicle" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Text fx:id="bestVehicle" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Pizza la + demandée" textAlignment="CENTER" GridPane.rowIndex="5">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Pizza la + demandée" textAlignment="CENTER" GridPane.rowIndex="5">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="bestPizza" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Text fx:id="bestPizza" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Pizza la - demandée" textAlignment="CENTER" GridPane.rowIndex="6">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Pizza la - demandée" textAlignment="CENTER" GridPane.rowIndex="6">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="worstPizza" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Text fx:id="worstPizza" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <Label contentDisplay="CENTER" text="Ingrediant favori" textAlignment="CENTER" GridPane.rowIndex="7">
+                        <Label contentDisplay="CENTER" minWidth="200.0" text="Ingrediant favori" textAlignment="CENTER" GridPane.rowIndex="7">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Text fx:id="favouriteIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="485.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Text fx:id="favouriteIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="?" wrappingWidth="420.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <font>
                               <Font size="16.0" />
                            </font>

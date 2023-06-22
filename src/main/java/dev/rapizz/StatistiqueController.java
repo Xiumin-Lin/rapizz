@@ -41,6 +41,10 @@ public class StatistiqueController {
         bestClient.setText(getBestClient());
         bestLivreur.setText(getBestLivreur());
         worstLivreur.setText(getWorstLivreur());
+        bestVehicle.setText(getBestVehicle());
+        bestPizza.setText(getBestPizza());
+        worstPizza.setText(getWorstPizza());
+        favouriteIngredient.setText(getFavIngredient());
     }
 
     private String getCA() {
@@ -55,7 +59,7 @@ public class StatistiqueController {
     }
 
     private String getBestClient() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/BestClient.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestClient.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int total_amount = rs.getInt("total_amount");
@@ -68,7 +72,7 @@ public class StatistiqueController {
     }
 
     private String getBestLivreur() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/BestLivreur.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestLivreur.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_livraison = rs.getInt("nb_livraison");
@@ -81,7 +85,7 @@ public class StatistiqueController {
     }
 
     private String getWorstLivreur() {
-        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/WorstLivreur.sql"))) {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/WorstLivreur.sql"))) {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int nb_retards = rs.getInt("nb_retards");
@@ -93,4 +97,55 @@ public class StatistiqueController {
         return null;
     }
 
+    private String getBestVehicle() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestVehicle.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_utilisations = rs.getInt("nb_utilisations");
+                return name + " (" + nb_utilisations + " utilisations)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getBestVehicle()", e);
+        }
+        return null;
+    }
+
+    private String getBestPizza() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/BestPizza.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_commandes = rs.getInt("nb_commandes");
+                return name + " (" + nb_commandes + " commandes)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getBestPizza()", e);
+        }
+        return null;
+    }
+
+    private String getWorstPizza() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/WorstPizza.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_commandes = rs.getInt("nb_commandes");
+                return name + " (" + nb_commandes + " commandes)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getWorstPizza()", e);
+        }
+        return null;
+    }
+
+    private String getFavIngredient() {
+        try(ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/one/FavIngredient.sql"))) {
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int nb_occurrences = rs.getInt("nb_occurrences");
+                return name + " (utilisé dans " + nb_occurrences + " pizzas)";
+            }
+        } catch (Exception e){
+            Utils.Log.error("Error on getFavIngredient()", e);
+        }
+        return null;
+    }
 }
