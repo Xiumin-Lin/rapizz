@@ -98,7 +98,9 @@ VALUES (1, 'Dominic Toretto'),
 INSERT INTO Vehicle (id_vehicle, name, type)
 VALUES (1, 'Dodge Charger', 'voiture'),
 (2, 'Toyota Supra', 'voiture'),
-(3, 'Yamaha YZF-R1', 'moto');
+(3, 'Yamaha YZF-R1', 'moto'),
+(4, 'BMW 3 Series', 'voiture'),
+(5, 'Harley-Davidson Street Glide', 'moto');
 
 
 -- Add clients

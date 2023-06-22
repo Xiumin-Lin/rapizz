@@ -1,17 +1,13 @@
 package dev.rapizz;
 
-import dev.rapizz.model.Command;
-import dev.rapizz.model.CommandDao;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
-import javafx.util.StringConverter;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatistiqueController {
     @FXML
@@ -34,6 +30,8 @@ public class StatistiqueController {
     @FXML
     public void initialize() {
         initGlobalStats();
+        initUnusedVehicleListView();
+        initClientListView();
     }
 
     private void initGlobalStats() {
@@ -147,5 +145,49 @@ public class StatistiqueController {
             Utils.Log.error("Error on getFavIngredient()", e);
         }
         return null;
+    }
+
+    @FXML
+    private ListView<String> vehicleListView;
+
+    public void initUnusedVehicleListView() {
+        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/UnusedVehicle.sql"))) {
+            List<String> list = new ArrayList<>();
+
+            while (rs.next()) {
+                int idVehicle = rs.getInt("id_vehicle");
+                String name = rs.getString("name");
+                String type = rs.getString("type");
+
+                String vehicleInfo = String.format("(ID %d) %s, %s", idVehicle, name, type);
+                list.add(vehicleInfo);
+            }
+
+            vehicleListView.getItems().addAll(list);
+        } catch (Exception e) {
+            Utils.Log.error("Error on getFavIngredient()", e);
+        }
+    }
+
+    @FXML
+    private ListView<String> clientListView;
+
+    public void initClientListView() {
+        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/CommandsByClient.sql"))) {
+            List<String> list = new ArrayList<>();
+
+            while (rs.next()) {
+                int idClient = rs.getInt("id_client");
+                String name = rs.getString("name");
+                int nb_command = rs.getInt("nb_command");
+
+                String clientStr = String.format("(ID %d) %s has ordered %d times", idClient, name, nb_command);
+                list.add(clientStr);
+            }
+
+            clientListView.getItems().addAll(list);
+        } catch (Exception e) {
+            Utils.Log.error("Error on getFavIngredient()", e);
+        }
     }
 }

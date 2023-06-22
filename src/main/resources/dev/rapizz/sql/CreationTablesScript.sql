@@ -42,8 +42,8 @@ CREATE TABLE Livreur
 -- Table containing company vehicles
 CREATE TABLE Vehicle
 (
-    id_vehicle INT                     NOT NULL AUTO_INCREMENT,
-    name        CHAR(20)                NOT NULL,
+    id_vehicle  INT                     NOT NULL AUTO_INCREMENT,
+    name        CHAR(30)                NOT NULL,
     type        ENUM ('voiture','moto') NOT NULL,
     PRIMARY KEY (id_vehicle)
 );
