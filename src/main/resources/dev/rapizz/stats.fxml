@@ -160,7 +160,14 @@
       </Tab>
       <Tab text="Most Regular Clients">
          <content>
-            <ScrollPane />
+            <ScrollPane>
+               <content>
+                  <ListView fx:id="regularClientListView" prefWidth="700.0" />
+               </content>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </ScrollPane>
          </content>
       </Tab>
    </tabs>

@@ -32,6 +32,7 @@ public class StatistiqueController {
         initGlobalStats();
         initUnusedVehicleListView();
         initClientListView();
+        initRegularClientListView();
     }
 
     private void initGlobalStats() {
@@ -186,6 +187,28 @@ public class StatistiqueController {
             }
 
             clientListView.getItems().addAll(list);
+        } catch (Exception e) {
+            Utils.Log.error("Error on getFavIngredient()", e);
+        }
+    }
+
+    @FXML
+    private ListView<String> regularClientListView;
+
+    public void initRegularClientListView() {
+        try (ResultSet rs = ConnectionManager.executeOneQueryScript(getClass().getResource("sql/query/MostRegularClients.sql"))) {
+            List<String> list = new ArrayList<>();
+
+            while (rs.next()) {
+                int idClient = rs.getInt("id_client");
+                String name = rs.getString("name");
+                int nb_command = rs.getInt("nb_command");
+
+                String clientStr = String.format("(ID %d) %s has ordered %d times", idClient, name, nb_command);
+                list.add(clientStr);
+            }
+
+            regularClientListView.getItems().addAll(list);
         } catch (Exception e) {
             Utils.Log.error("Error on getFavIngredient()", e);
         }
