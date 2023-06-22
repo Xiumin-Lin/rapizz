@@ -48,7 +48,7 @@ CREATE TABLE Vehicle
     PRIMARY KEY (id_vehicle)
 );
 
--- Table containing all customer orders
+-- Table containing all pizza size
 CREATE TABLE Size
 (
     id_size        INT      NOT NULL AUTO_INCREMENT,

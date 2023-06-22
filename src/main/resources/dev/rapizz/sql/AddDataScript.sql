@@ -27,15 +27,16 @@ VALUES (1, 'Sauce Tomate'),
 -- Add pizzas
 INSERT INTO Pizza (id_pizza, name, price, picture_url)
 VALUES (1, 'Margherita', 9.99, 'Margherita.jpg'),
-       (2, 'Pepperoni', 11.99, 'Pepperoni.jpg'),
-       (3, 'Vegetarienne', 10.99, 'Vegetarienne.jpg'),
-       (4, 'Hawaienne', 12.99, 'Hawaienne.jpg'),
-       (5, 'Meet Lovers', 13.99, 'Meet_Lovers.jpg'),
-       (6, 'Poulet BBQ', 11.99, 'Poulet_BBQ.jpg'),
-       (7, 'Champignons', 10.99, 'Champignons.jpg'),
-       (8, 'Supreme', 12.99, 'Supreme.jpg'),
-       (9, 'Quatre Fromages', 11.99, 'Quatre_Fromages.jpg'),
-       (10, 'Veggie Deluxe', 12.99, 'Veggie_Deluxe.jpg');
+       (2, 'Pepperoni', 11.99, 'https://assets.afcdn.com/recipe/20190319/89655_w1024h1024c1cx3680cy2456.webp'),
+       (3, 'Vegetarienne', 10.99, 'https://assets.afcdn.com/recipe/20170427/39421_w1024h1024c1cx831cy571.jpg'),
+       (4, 'Hawaienne', 12.99, 'https://assets.afcdn.com/recipe/20161005/3905_origin.jpg'),
+       (5, 'Meet Lovers', 13.99, 'https://assets.afcdn.com/recipe/20170323/11766_w1024h768c1cx1728cy1152.webp'),
+       (6, 'Poulet BBQ', 11.99,
+        'https://cdn.shopify.com/s/files/1/0408/5655/1588/articles/bbq_pizza_6534116b-0905-492b-b8c2-3492929cced2.jpg?crop=center&height=800&v=1616496778&width=800'),
+       (7, 'Champignons', 10.99, 'https://assets.afcdn.com/recipe/20161130/2342_w1024h1024c1cx2699cy1799.jpg'),
+       (8, 'Supreme', 12.99, 'https://assets.afcdn.com/recipe/20171206/75873_origincxt0cyt0cxb4912cyb3264.jpg'),
+       (9, 'Quatre Fromages', 11.99, 'https://assets.afcdn.com/recipe/20160926/5624_w1024h1024c1cx1872cy2808.webp'),
+       (10, 'Veggie Deluxe', 12.99, 'https://assets.afcdn.com/recipe/20170105/1769_w1024h1024c1cx1824cy2736.jpg');
 
 -- Associate ingredients with pizzas 
 INSERT INTO Compose (id_pizza, id_ingredient)
