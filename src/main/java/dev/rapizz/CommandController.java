@@ -27,7 +27,9 @@ public class CommandController {
     @FXML
     private Text dateStart;
     @FXML
-    private Text lateValue;
+    private Text statusValue;
+    @FXML
+    private Text deliveryTime;
     @FXML
     private Label totalPrice;
 
@@ -64,7 +66,8 @@ public class CommandController {
         if(c.getVehicle() != null) vehicleName.setText(c.getVehicle().getName());
         else vehicleName.setText("Pas de vehicule");
         dateStart.setText(c.getDate_start().toString());
-        lateValue.setText(c.getDurationInMinutes() + " min");
+        statusValue.setText(c.getStatus());
+        deliveryTime.setText(c.getDurationInMinutes() + " min");
         totalPrice.setText(c.getPrice() + " €");
     }
 

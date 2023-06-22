@@ -1,5 +1,8 @@
 package dev.rapizz.model;
 
+import dev.rapizz.Utils;
+
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -7,15 +10,15 @@ public class Command {
     private final int id_command;
     private double price;
     private String status;
-    private Date date_start;
-    private Date date_end;
+    private Timestamp date_start;
+    private Timestamp date_end;
     private Pizza pizza;
     private Size size;
     private Client client;
     private Livreur livreur;
     private Vehicle vehicle;
 
-    public Command(int idCommande, double price, String status, Date dateDebut, Date dateFin,
+    public Command(int idCommande, double price, String status, Timestamp dateDebut, Timestamp dateFin,
                    Pizza pizza, Size size, Client client, Livreur livreur, Vehicle vehicle) {
         this.id_command = idCommande;
         this.price = Math.round(price * 100.0) / 100.0;
@@ -41,11 +44,11 @@ public class Command {
         return status;
     }
 
-    public Date getDate_start() {
+    public Timestamp getDate_start() {
         return date_start;
     }
 
-    public Date getDate_end() {
+    public Timestamp getDate_end() {
         return date_end;
     }
 
@@ -74,6 +77,7 @@ public class Command {
 
         long durationInMillis = date_end.getTime() - date_start.getTime();
         long min = TimeUnit.MILLISECONDS.toMinutes(durationInMillis);
-        return min > 0 ? min : 0;
+        Utils.Log.info(this.id_command + ": " + date_start + ", " + date_end + " = " + min);
+        return Math.max(min, 0);
     }
 }
